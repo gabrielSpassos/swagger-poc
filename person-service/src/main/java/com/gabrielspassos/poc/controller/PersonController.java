@@ -6,10 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/people")
@@ -25,12 +24,12 @@ public class PersonController {
     @ApiResponses(value= {
             @ApiResponse(
                     code=200,
-                    message="Retorna um PersonModel com uma mensagem de sucesso",
+                    message="Retorna um PersonModel",
                     response=PersonModel.class
             ),
             @ApiResponse(
-                    code=500,
-                    message="Caso tenhamos algum erro vamos retornar um Error com a Exception",
+                    code=404,
+                    message="Caso tenhamos algum erro vamos retornar uma mensagem de erro",
                     response=Error.class
             )
 
@@ -39,5 +38,18 @@ public class PersonController {
             method = RequestMethod.GET)
     public PersonModel getPersonById(@PathVariable("id") int id){
         return personService.getPersonById(id);
+    }
+
+    @ApiOperation(
+            value="Get all people",
+            response=PersonModel.class,
+            notes="Essa operação pega as informações de todas as pessoas.")
+    @ApiResponse(
+            code=200,
+            message="Retorna uma lista de pessoas",
+            response=PersonModel.class)
+    @GetMapping
+    public List<PersonModel> getAllPerson(){
+        return personService.getAllPerson();
     }
 }

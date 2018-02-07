@@ -6,13 +6,13 @@ import com.gabrielspassos.poc.model.PersonModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonService {
 
     @Autowired
     PersonDAO personDAO;
-
-    private PersonModel person = new PersonModel();
 
     public PersonService() {
     }
@@ -26,5 +26,9 @@ public class PersonService {
                 .filter(person -> person.getId() == id)
                 .findFirst()
                 .orElseThrow(IdNotExistException::new);
+    }
+
+    public List<PersonModel> getAllPerson(){
+        return personDAO.getPeopleList();
     }
 }
