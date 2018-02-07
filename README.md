@@ -15,5 +15,8 @@ http://localhost:9000/swagger-ui.html
 #### Person Service Endpoints
 ```
 [Method: GET]
+http://localhost:9000/people
+
+[Method: GET]
 http://localhost:9000/people/[person id]
 ```
