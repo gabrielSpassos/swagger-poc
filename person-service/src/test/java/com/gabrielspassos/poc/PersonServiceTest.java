@@ -34,7 +34,6 @@ public class PersonServiceTest {
 
     @Test(expected = IdNotExistException.class)
     public void mustThrowIdNotExist() {
-        personService.setPersonDAO(new PersonDAO());
         personService.getPersonById(100);
     }
 
@@ -63,5 +62,19 @@ public class PersonServiceTest {
         peopleExpected.add(new PersonModel(4,"Jose","Silva",27));
         peopleExpected.add(new PersonModel(5,"Maria","Bonita",24));
         return peopleExpected;
+    }
+
+    @Test(expected = IdNotExistException.class)
+    public void mustThrowExceptionWhenUseDeleteMethod() {
+        personService.deletePersonById(100);
+    }
+
+    @Test
+    public void mustReturnAPersonWhenUseDeleteMethod(){
+        PersonModel personModelReturned =  personService.deletePersonById(1);
+        assertEquals(1,personModelReturned.getId());
+        assertEquals("Gabriel",personModelReturned.getName());
+        assertEquals("Passos",personModelReturned.getLastName());
+        assertEquals(20,personModelReturned.getAge());
     }
 }

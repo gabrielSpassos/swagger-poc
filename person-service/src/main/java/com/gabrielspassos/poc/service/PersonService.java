@@ -21,14 +21,18 @@ public class PersonService {
         this.personDAO = personDAO;
     }
 
+    public List<PersonModel> getAllPerson(){
+        return personDAO.getPeopleList();
+    }
+
+    public PersonModel deletePersonById(int id){
+        return personDAO.deletePersonById(getPersonById(id).getId());
+    }
+
     public PersonModel getPersonById(int id){
         return personDAO.getPeopleList().stream()
                 .filter(person -> person.getId() == id)
                 .findFirst()
                 .orElseThrow(IdNotExistException::new);
-    }
-
-    public List<PersonModel> getAllPerson(){
-        return personDAO.getPeopleList();
     }
 }

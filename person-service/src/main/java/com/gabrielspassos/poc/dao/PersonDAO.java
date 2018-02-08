@@ -23,4 +23,18 @@ public class PersonDAO {
         return peopleList;
     }
 
+    public PersonModel deletePersonById(int id){
+        return peopleList.remove(getArrayIndexByPersonId(id));
+    }
+
+    private int getArrayIndexByPersonId(int id){
+        int arrayIndex = 999999999;
+        for (PersonModel person: peopleList) {
+            if(person.getId() == id){
+                arrayIndex = peopleList.indexOf(person);
+            }
+        }
+        return arrayIndex;
+    }
+
 }

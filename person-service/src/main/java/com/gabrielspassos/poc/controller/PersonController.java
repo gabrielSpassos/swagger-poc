@@ -52,4 +52,26 @@ public class PersonController {
     public List<PersonModel> getAllPerson(){
         return personService.getAllPerson();
     }
+
+    @ApiOperation(
+            value = "Deleta pessoa pelo seu id",
+            response = PersonModel.class,
+            notes = "Essa operação deleta uma pessoa"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    code = 200,
+                    message = "Retorna PersonModel deletado",
+                    response = PersonModel.class
+            ),
+            @ApiResponse(
+                    code = 404,
+                    message = "Caso tenhamos algum erro vamos retornar uma mensagem de erro",
+                    response = Error.class
+            )
+    })
+    @DeleteMapping(value = "/{id}")
+    public PersonModel deletePersonById(@PathVariable("id") int id){
+        return personService.deletePersonById(id);
+    }
 }
