@@ -19,4 +19,7 @@ http://localhost:9000/people
 
 [Method: GET]
 http://localhost:9000/people/[person id]
+
+[Method: DELETE]
+http://localhost:9000/people/[person id]
 ```
