@@ -1,5 +1,6 @@
 package com.gabrielspassos.poc.controller;
 
+import com.gabrielspassos.poc.controller.dto.PersonDto;
 import com.gabrielspassos.poc.model.PersonModel;
 import com.gabrielspassos.poc.service.PersonService;
 import io.swagger.annotations.ApiOperation;
@@ -73,5 +74,48 @@ public class PersonController {
     @DeleteMapping(value = "/{id}")
     public PersonModel deletePersonById(@PathVariable("id") int id){
         return personService.deletePersonById(id);
+    }
+
+    @ApiOperation(
+            value = "Salva pessoa",
+            response = PersonModel.class,
+            notes = "Essa operação salva uma pessoa"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    code = 201,
+                    message = "Retorna PersonModel inserido",
+                    response = PersonModel.class
+            )
+    })
+    @PostMapping
+    public PersonModel savePerson(@RequestBody PersonDto personDto){
+        return personService.savePerson(convertToModel(personDto));
+    }
+
+    @ApiOperation(
+            value = "Atualiza pessoa",
+            response = PersonModel.class,
+            notes = "Essa operação salva uma pessoa"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    code = 200,
+                    message = "Retorna PersonModel inserido",
+                    response = PersonModel.class
+            )
+    })
+    @PutMapping
+    public PersonModel updatePerson(@RequestBody PersonDto personDto){
+        return personService.updatePerson(convertToModel(personDto));
+    }
+
+    private PersonModel convertToModel(PersonDto personDto){
+        PersonModel personModel = new PersonModel();
+        personModel.setId(personDto.getId());
+        personModel.setName(personDto.getName());
+        personModel.setLastName(personDto.getLastName());
+        personModel.setAge(personDto.getAge());
+        return personModel;
     }
 }

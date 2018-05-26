@@ -27,6 +27,18 @@ public class PersonDAO {
         return peopleList.remove(getArrayIndexByPersonId(id));
     }
 
+    public PersonModel savePerson(PersonModel personModel) {
+        peopleList.add(personModel);
+        return peopleList.get(peopleList.indexOf(personModel));
+    }
+
+    public PersonModel updatePerson(PersonModel personModel) {
+        int position = getArrayIndexByPersonId(personModel.getId());
+        deletePersonById(personModel.getId());
+        peopleList.add(position, personModel);
+        return personModel;
+    }
+
     private int getArrayIndexByPersonId(int id){
         int arrayIndex = 999999999;
         for (PersonModel person: peopleList) {
@@ -36,5 +48,4 @@ public class PersonDAO {
         }
         return arrayIndex;
     }
-
 }

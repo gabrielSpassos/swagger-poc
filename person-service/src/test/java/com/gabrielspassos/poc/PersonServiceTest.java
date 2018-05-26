@@ -2,7 +2,6 @@ package com.gabrielspassos.poc;
 
 import com.gabrielspassos.poc.dao.PersonDAO;
 import com.gabrielspassos.poc.exception.IdNotExistException;
-
 import com.gabrielspassos.poc.model.PersonModel;
 import com.gabrielspassos.poc.service.PersonService;
 import org.junit.Before;
@@ -76,5 +75,43 @@ public class PersonServiceTest {
         assertEquals("Gabriel",personModelReturned.getName());
         assertEquals("Passos",personModelReturned.getLastName());
         assertEquals(20,personModelReturned.getAge());
+    }
+
+    @Test
+    public void mustReturnAPersonWhenUsePostMethod(){
+        PersonModel personModel = buildPersonModel(6, "John", "Smith", 32);
+        PersonModel personModelReturned =  personService.savePerson(personModel);
+
+        assertEquals(6, personModelReturned.getId());
+        assertEquals("John", personModelReturned.getName());
+        assertEquals("Smith", personModelReturned.getLastName());
+        assertEquals(32, personModelReturned.getAge());
+    }
+
+    @Test(expected = IdNotExistException.class)
+    public void mustThrowIdNotExistForUpdateMethod() {
+        personService.updatePerson(buildPersonModel(9999, "Gabriel", "Santos", 20));
+    }
+
+    @Test
+    public void mustUpdatePerson() {
+        PersonModel personReturned = personService.updatePerson(
+                buildPersonModel(1, "Gabriel", "Santos", 21)
+        );
+
+        assertEquals(1, personReturned.getId());
+        assertEquals("Gabriel", personReturned.getName());
+        assertEquals("Santos", personReturned.getLastName());
+        assertEquals(21, personReturned.getAge());
+
+    }
+
+    private PersonModel buildPersonModel(int id, String name, String lastName, int age){
+        PersonModel person = new PersonModel();
+        person.setId(id);
+        person.setName(name);
+        person.setLastName(lastName);
+        person.setAge(age);
+        return person;
     }
 }

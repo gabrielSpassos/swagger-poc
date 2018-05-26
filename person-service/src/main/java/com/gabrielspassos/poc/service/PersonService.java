@@ -35,4 +35,13 @@ public class PersonService {
                 .findFirst()
                 .orElseThrow(IdNotExistException::new);
     }
+
+    public PersonModel savePerson(PersonModel personModel) {
+        return personDAO.savePerson(personModel);
+    }
+
+    public PersonModel updatePerson(PersonModel personModel) {
+        getPersonById(personModel.getId());
+        return personDAO.updatePerson(personModel);
+    }
 }
