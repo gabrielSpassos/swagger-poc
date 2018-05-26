@@ -105,9 +105,9 @@ public class PersonController {
                     response = PersonModel.class
             )
     })
-    @PutMapping
-    public PersonModel updatePerson(@RequestBody PersonDto personDto){
-        return personService.updatePerson(convertToModel(personDto));
+    @PutMapping(value = "/{id}")
+    public PersonModel updatePerson(@PathVariable("id") int id, @RequestBody PersonDto personDto){
+        return personService.updatePerson(id, convertToModel(personDto));
     }
 
     private PersonModel convertToModel(PersonDto personDto){

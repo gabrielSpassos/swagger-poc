@@ -40,8 +40,8 @@ public class PersonService {
         return personDAO.savePerson(personModel);
     }
 
-    public PersonModel updatePerson(PersonModel personModel) {
-        getPersonById(personModel.getId());
-        return personDAO.updatePerson(personModel);
+    public PersonModel updatePerson(int id, PersonModel personModel) {
+        getPersonById(id);
+        return personDAO.updatePerson(id , personModel);
     }
 }

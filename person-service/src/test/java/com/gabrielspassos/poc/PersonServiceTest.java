@@ -90,12 +90,12 @@ public class PersonServiceTest {
 
     @Test(expected = IdNotExistException.class)
     public void mustThrowIdNotExistForUpdateMethod() {
-        personService.updatePerson(buildPersonModel(9999, "Gabriel", "Santos", 20));
+        personService.updatePerson(9999, buildPersonModel(9999, "Gabriel", "Santos", 20));
     }
 
     @Test
     public void mustUpdatePerson() {
-        PersonModel personReturned = personService.updatePerson(
+        PersonModel personReturned = personService.updatePerson(1,
                 buildPersonModel(1, "Gabriel", "Santos", 21)
         );
 

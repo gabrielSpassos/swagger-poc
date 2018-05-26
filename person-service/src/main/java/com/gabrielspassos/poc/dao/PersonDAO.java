@@ -32,10 +32,9 @@ public class PersonDAO {
         return peopleList.get(peopleList.indexOf(personModel));
     }
 
-    public PersonModel updatePerson(PersonModel personModel) {
-        int position = getArrayIndexByPersonId(personModel.getId());
-        deletePersonById(personModel.getId());
-        peopleList.add(position, personModel);
+    public PersonModel updatePerson(int id, PersonModel personModel) {
+        deletePersonById(id);
+        peopleList.add(id, personModel);
         return personModel;
     }
 
